@@ -1,0 +1,8 @@
+/Debug
+/Release
+/x64
+/.vs
+/brick_puzzle/Debug
+/brick_puzzle/Release
+/brick_puzzle/x64
+/brick_puzzle/*.user
