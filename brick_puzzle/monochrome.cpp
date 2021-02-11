@@ -189,34 +189,6 @@ bool Monochrome::HitWalls(const Location& pos, const  std::pair<uint32_t, uint32
   return pos.x + size.first > s_board_width || pos.y + size.second > s_board_width;
 }
 
-template <typename Array>
-bool Monochrome::Match1(const Array& bad_pattern, const Array& mask, uint32_t width) const
-{
-  uint32_t this_width = s_board_width + kBorderSize * 2;
-  for (uint32_t y = 0; y < lines_.size() - bad_pattern.size() + 1; y++) {
-    for (uint32_t x = 0; x < this_width - width + 1; x++) {
-      uint32_t shifted_mask = mask[0] >> x;
-      uint32_t masked_u = lines_[y] & shifted_mask;
-      if (!(masked_u ^ (bad_pattern[0] >> x))) { // Matched 1st line.
-        bool matched = true;
-        for (uint32_t i = 1; i < bad_pattern.size(); i++) {
-          shifted_mask = mask[i] >> x;
-          masked_u = lines_[y + i] & shifted_mask;
-          if (masked_u ^ (bad_pattern[i] >> x)) {
-            matched = false;
-            break;
-          }
-        }
-
-        if (matched)
-          return true;
-      }
-    }
-  }
-
-  return false;
-}
-
 // A faster version of pattern recognition.
 // We try to flatten the data so as to reduce the times of comparison and the number of code branches.
 // The pattern will be ogonzized as "xxx______xxx______xxx______" and the data will be flatten in the same way.

@@ -65,8 +65,6 @@ private:
   bool DetectBadPattern2(const Location& pos, const std::pair<uint32_t, uint32_t>& size) const;
 
   template <typename Array>
-  bool Match1(const Array& bad_pattern, const Array& mask, uint32_t width) const;
-  template <typename Array>
   bool Match2(const Array& bad_pattern, const Array& mask, uint32_t width) const;
 
   std::vector<uint32_t> lines_;
